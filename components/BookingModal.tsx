@@ -159,7 +159,7 @@ const BookingModal: React.FC = () => {
                   <motion.div
                      initial={{ scale: 0 }}
                      animate={{ scale: 1 }}
-                     type="spring"
+                     transition={{ type: "spring" }}
                      className="text-green-500 mb-6"
                   >
                     <CheckCircle size={64} />

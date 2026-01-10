@@ -22,16 +22,14 @@ const About: React.FC = () => {
           className="relative"
         >
           <div className="absolute top-0 left-0 w-full h-full border border-gold transform -translate-x-4 -translate-y-4 z-0" />
-          {/* 
-             USING ONLINE IMAGE TO FIX BROKEN LINK.
-             To use your own photo:
-             1. Add 'kalina.jpg' to the /public/assets folder
-             2. Change src to "/assets/kalina.jpg"
-          */}
           <img 
-            src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?q=80&w=1000&auto=format&fit=crop" 
+            src="/kalina.png" 
             alt="Калина Иванова - Основател на Studio Day & Night" 
-            className="relative z-10 w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-700"
+            className="relative z-10 w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl"
+            onError={(e) => {
+              // Fallback if image is missing or named differently
+              e.currentTarget.src = "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?q=80&w=1000&auto=format&fit=crop";
+            }}
           />
         </motion.div>
 

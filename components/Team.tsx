@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 import { useBooking } from '../context/BookingContext';
 import { TEAM_MEMBERS } from '../constants';
@@ -14,7 +14,7 @@ const Team: React.FC = () => {
   const cardBg = theme === 'day' ? 'bg-white' : 'bg-charcoal/40';
   const borderColor = theme === 'day' ? 'border-gold/30' : 'border-gold/20';
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -24,7 +24,7 @@ const Team: React.FC = () => {
     },
   };
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
