@@ -3,15 +3,15 @@ import { motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 
 const BRANDS = [
-  "Alexandra's Proline", 
-  "Alfaparf Milano", 
-  "Barba Italiana", 
-  "Clarissa", 
-  "Dama Nail Art", 
-  "Insight", 
-  "Mi Amante", 
-  "Secretly", 
-  "SNB Professional"
+  { name: "Alexandra's Proline", logo: 'alexandras-proline.png' },
+  { name: "Alfaparf Milano", logo: 'alfaparf-milano.png' },
+  { name: "Barba Italiana", logo: 'barba-italiana.png' },
+  { name: "Insight", logo: 'insight.png' },
+  { name: "Mi Amante", logo: 'mi-amante.png' },
+  { name: "SNB Professional", logo: 'snb-professional.png' },
+  // { name: "Clarissa", logo: 'clarissa.png' },
+  // { name: "Dama Nail Art", logo: 'dama-nail-art.png' },
+  // { name: "Secretly", logo: 'secretly.png' },
 ];
 
 const Brands: React.FC = () => {
@@ -20,7 +20,6 @@ const Brands: React.FC = () => {
   const isDay = theme === 'day';
   const bgColor = isDay ? 'bg-white' : 'bg-[#18181B]';
   const borderColor = isDay ? 'border-gray-100' : 'border-white/5';
-  const textColor = isDay ? 'text-charcoal' : 'text-white';
 
   return (
     <section className={`py-16 px-6 ${bgColor} border-t ${borderColor}`}>
@@ -29,25 +28,21 @@ const Brands: React.FC = () => {
           Доверени Световни Брандове
         </span>
 
-        {/* 
-          Text-based "Logo" Cloud
-          Uses elegant typography instead of broken images for a premium feel.
-        */}
         <div className="w-full flex flex-wrap justify-center gap-x-12 gap-y-8 items-center">
           {BRANDS.map((brand, index) => (
             <motion.div
-              key={brand}
+              key={brand.name}
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
               viewport={{ once: true }}
-              className={`
-                font-serif text-xl md:text-2xl italic tracking-wide cursor-default
-                transition-all duration-500
-                ${textColor} opacity-40 hover:opacity-100 hover:text-gold hover:scale-105
-              `}
+              className="transition-all duration-500 opacity-40 hover:opacity-100 hover:scale-105"
             >
-              {brand}
+              <img 
+                src={`/${brand.logo}`} 
+                alt={brand.name} 
+                className="h-12 md:h-16 object-contain"
+              />
             </motion.div>
           ))}
         </div>
