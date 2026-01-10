@@ -6,7 +6,7 @@ const PARTNERS = [
   {
     name: "Alexandra's Proline",
     logo: '/assets/images/alexandras-proline.png',
-    fallbackUrl: 'https://proline.bg/assets/img/logo.png' // Примерна/Placeholder връзка
+    fallbackUrl: 'https://proline.bg/assets/img/logo.png' 
   },
   {
     name: 'Alfaparf Milano',
@@ -26,7 +26,7 @@ const PARTNERS = [
   {
     name: 'Da Ma Nail Art',
     logo: '/assets/images/dama-nail-art.png',
-    fallbackUrl: 'https://via.placeholder.com/300x150/ffffff/000000?text=DA+MA' // Fallback text image if real URL not found
+    fallbackUrl: '' // No reliable public URL, relies on local file
   },
   {
     name: 'Insight',
@@ -58,14 +58,14 @@ const Brands: React.FC = () => {
   const borderColor = isDay ? 'border-gray-100' : 'border-white/5';
 
   return (
-    <section className={`py-20 px-6 ${bgColor} border-t ${borderColor}`}>
+    <section className={`py-24 px-6 ${bgColor} border-t ${borderColor}`}>
       <div className="max-w-7xl mx-auto flex flex-col items-center">
-        <span className="text-gold/50 uppercase tracking-[0.3em] text-[10px] font-bold mb-14">
+        <span className="text-gold/50 uppercase tracking-[0.3em] text-[10px] font-bold mb-16">
           Марките, с които работим
         </span>
 
-        {/* Използваме flex-wrap и justify-center, за да центрираме идеално 9-те лога */}
-        <div className="w-full flex flex-wrap justify-center items-center gap-x-16 gap-y-12 opacity-80">
+        {/* Flexible Grid for 9 items */}
+        <div className="w-full flex flex-wrap justify-center items-center gap-x-12 gap-y-12 md:gap-x-20 md:gap-y-16">
           
           {PARTNERS.map((brand, index) => (
             <motion.div
@@ -74,29 +74,27 @@ const Brands: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
               viewport={{ once: true }}
-              className="flex justify-center"
+              className="flex justify-center group"
             >
-              <div className="w-36 h-20 relative flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-500 opacity-60 hover:opacity-100 hover:scale-105 cursor-pointer">
+              <div className="w-32 h-16 md:w-40 md:h-20 relative flex items-center justify-center grayscale transition-all duration-500 opacity-50 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 cursor-pointer">
                 <img 
                   src={brand.logo}
                   alt={brand.name}
                   className="max-w-full max-h-full object-contain"
                   style={{ filter: isDay ? 'none' : 'brightness(0) invert(1)' }}
                   onError={(e) => {
-                    // Fallback logic for missing local files
                     const imgElement = e.currentTarget;
-                    if (imgElement.src !== brand.fallbackUrl && brand.fallbackUrl) {
+                    // Try fallback if local file fails
+                    if (brand.fallbackUrl && imgElement.src !== brand.fallbackUrl) {
                       imgElement.src = brand.fallbackUrl;
                     } else {
+                      // Final fallback: Text
                       imgElement.style.display = 'none';
-                      if (imgElement.parentElement) {
-                          // Prevent duplicate text if react re-renders
-                          if (!imgElement.parentElement.querySelector('span')) {
-                            const span = document.createElement('span');
-                            span.innerText = brand.name;
-                            span.className = `font-serif font-bold text-center text-sm ${isDay ? 'text-charcoal' : 'text-white'}`;
-                            imgElement.parentElement.appendChild(span);
-                          }
+                      if (imgElement.parentElement && !imgElement.parentElement.querySelector('span')) {
+                          const span = document.createElement('span');
+                          span.innerText = brand.name;
+                          span.className = `font-serif font-bold text-center text-xs ${isDay ? 'text-charcoal' : 'text-white'}`;
+                          imgElement.parentElement.appendChild(span);
                       }
                     }
                   }}
