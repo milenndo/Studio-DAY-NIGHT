@@ -23,9 +23,10 @@ const About: React.FC = () => {
         >
           <div className="absolute top-0 left-0 w-full h-full border border-gold transform -translate-x-4 -translate-y-4 z-0" />
           {/* 
-            NOTE: To use the real photo of Kalina:
-            1. Save your photo as 'kalina.jpg' in the 'public/assets/' folder of your project.
-            2. Change the src below to: "/assets/kalina.jpg"
+             USING ONLINE IMAGE TO FIX BROKEN LINK.
+             To use your own photo:
+             1. Add 'kalina.jpg' to the /public/assets folder
+             2. Change src to "/assets/kalina.jpg"
           */}
           <img 
             src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?q=80&w=1000&auto=format&fit=crop" 
