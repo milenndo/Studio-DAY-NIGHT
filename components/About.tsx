@@ -9,6 +9,10 @@ const About: React.FC = () => {
   const textColor = theme === 'day' ? 'text-charcoal' : 'text-alabaster';
   const bgColor = theme === 'day' ? 'bg-alabaster' : 'bg-night';
 
+  // ПЪТ КЪМ СНИМКАТА НА КАЛИНА:
+  // Файлът трябва да е в: public/assets/images/kalina.png
+  const kalinaImage = "/assets/images/kalina.png";
+
   return (
     <section id="about" className={`py-24 px-6 md:px-20 ${bgColor} relative overflow-hidden`}>
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
@@ -23,11 +27,11 @@ const About: React.FC = () => {
         >
           <div className="absolute top-0 left-0 w-full h-full border border-gold transform -translate-x-4 -translate-y-4 z-0" />
           <img 
-            src="/kalina.png" 
+            src={kalinaImage} 
             alt="Калина Иванова - Основател на Studio Day & Night" 
             className="relative z-10 w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl"
             onError={(e) => {
-              // Fallback if image is missing or named differently
+              // Fallback if image is missing
               e.currentTarget.src = "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?q=80&w=1000&auto=format&fit=crop";
             }}
           />
