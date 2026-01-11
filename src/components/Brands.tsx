@@ -5,39 +5,48 @@ import { useTheme } from '../context/ThemeContext';
 const PARTNERS = [
   {
     name: "Alexandra's Proline",
-    logo: '/assets/images/alexandras-proline.png'
+    logo: '/assets/images/alexandras-proline.png',
+    fallbackUrl: 'https://proline.bg/assets/img/logo.png'
   },
   {
     name: 'Alfaparf Milano',
-    logo: '/assets/images/alfaparf.png'
+    logo: '/assets/images/alfaparf.png',
+    fallbackUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Alfaparf_Milano_Logo.svg/2560px-Alfaparf_Milano_Logo.svg.png'
   },
   {
     name: 'Barba Italiana',
-    logo: '/assets/images/barba-italiana.png'
+    logo: '/assets/images/barba-italiana.png',
+    fallbackUrl: 'https://www.barbaitaliana.com/wp-content/uploads/2019/06/barba-italiana-logo.png'
   },
   {
     name: 'Clarissa',
-    logo: '/assets/images/clarissa.png'
+    logo: '/assets/images/clarissa.png',
+    fallbackUrl: 'https://clarissacosmetics.com/wp-content/uploads/2020/06/logo-mobile.png'
   },
   {
     name: 'Da Ma Nail Art',
-    logo: '/assets/images/dama-nail-art.png'
+    logo: '/assets/images/dama-nail-art.png',
+    fallbackUrl: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400'
   },
   {
     name: 'Insight',
-    logo: '/assets/images/insight.png'
+    logo: '/assets/images/insight.png',
+    fallbackUrl: 'https://www.insightprofessional.it/img/logo-insight.png'
   },
   {
     name: 'Mi Amante Professional',
-    logo: '/assets/images/mi-amante.png'
+    logo: '/assets/images/mi-amante.png',
+    fallbackUrl: 'https://miamante.bg/wp-content/uploads/2020/10/mi-amante-logo-1.png'
   },
   {
     name: 'Secretly Professional',
-    logo: '/assets/images/secretly-professional.png'
+    logo: '/assets/images/secretly-professional.png',
+    fallbackUrl: 'https://secretly-professional.com/wp-content/uploads/2021/03/Secretly-Logo-Black.png'
   },
   {
     name: 'SNB Professional',
-    logo: '/assets/images/snb-professional.png'
+    logo: '/assets/images/snb-professional.png',
+    fallbackUrl: 'https://starnails.bg/img/leoblog/b/1/33/770_481/SNB-Professional-logo.png'
   }
 ];
 
@@ -75,12 +84,18 @@ const Brands: React.FC = () => {
                   style={{ filter: isDay ? 'none' : 'brightness(0) invert(1)' }}
                   onError={(e) => {
                     const imgElement = e.currentTarget;
-                    imgElement.style.display = 'none';
-                    if (imgElement.parentElement && !imgElement.parentElement.querySelector('span')) {
-                        const span = document.createElement('span');
-                        span.innerText = brand.name;
-                        span.className = `font-serif font-bold text-center text-xs ${isDay ? 'text-charcoal' : 'text-white'}`;
-                        imgElement.parentElement.appendChild(span);
+                    // Check if we haven't switched to fallback yet
+                    if (brand.fallbackUrl && imgElement.src !== brand.fallbackUrl) {
+                      imgElement.src = brand.fallbackUrl;
+                    } else {
+                      // If fallback fails or doesn't exist, hide image and show text
+                      imgElement.style.display = 'none';
+                      if (imgElement.parentElement && !imgElement.parentElement.querySelector('span')) {
+                          const span = document.createElement('span');
+                          span.innerText = brand.name;
+                          span.className = `font-serif font-bold text-center text-xs ${isDay ? 'text-charcoal' : 'text-white'}`;
+                          imgElement.parentElement.appendChild(span);
+                      }
                     }
                   }}
                 />
