@@ -1,4 +1,5 @@
 import { ServiceCategory, Review, TeamMember } from './types';
+      
 
 // Real Pricing Data Structure
 export const SERVICE_CATEGORIES: ServiceCategory[] = [
